@@ -1,35 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from 'react';
+import './App.css';
+import { obterHoraAtual, obterDiaSemana } from './utils/tempo';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [hora, setHora] = useState(obterHoraAtual());
+
+  // Função que atualiza o estado da hora
+  function atualizaHorario() {
+    setHora(obterHoraAtual());
+  }
+
+  // useEffect para atualizar a hora a cada segundo
+  useEffect(() => {
+    const intervalo = setInterval(atualizaHorario, 1000);
+    return () => clearInterval(intervalo); // limpa o intervalo ao desmontar
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div>
+      <p>Hoje é: {obterDiaSemana()}</p>
+      <p>Hora atual: {hora}</p>
+    </div>
+  );
 }
 
-export default App
+export default App;
