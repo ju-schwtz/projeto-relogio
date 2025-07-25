@@ -9,3 +9,4 @@ export function obterDiaSemana(): string {
   const dias = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
   return dias[new Date().getDay()];
 }
+
