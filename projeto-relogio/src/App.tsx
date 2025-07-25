@@ -13,13 +13,15 @@ function App() {
   // useEffect para atualizar a hora a cada segundo
   useEffect(() => {
     const intervalo = setInterval(atualizaHorario, 1000);
+
+    
     return () => clearInterval(intervalo); // limpa o intervalo ao desmontar
   }, []);
 
   return (
     <div>
       <p>Hoje é: {obterDiaSemana()}</p>
-      <p>Hora atual: {hora}</p>
+      <h2>Horário atual: {hora}</h2>
     </div>
   );
 }
